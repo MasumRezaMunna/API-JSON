@@ -4,25 +4,20 @@ const loadData = () => {
       .then(json => console.log(json))
 }
 
-// console.log('Explore API');
+const loadPost = () => {
+  const url = "https://jsonplaceholder.typicode.com/posts"
 
-// const person = {
-//     name: 'selim',
-//     fruit: 'dalim',
-//     dish: 'halim',
-//     friends: ['alim', 'kolim', 'lamim'],
-//     isRich: false,
-//     money: 34000,
-// };
-// console.log(person, typeof person);
+  fetch(url)
+  .then((res) => res.json())
+  .then((json) => {
+    console.log(json);
+    displayPost(json);
+  })
 
-// // JSON --> JS object with Notification
-// // JSON.stringify --> JSON
-// // JSON.parse --> Object
+}
 
-// const personJSON = JSON.stringify(person)
-// console.log(personJSON, typeof personJSON)
-
-
-// const parseJSON = JSON.parse(personJSON);
-// console.log(parseJSON, typeof parseJSON)
+const displayPost = (posts) => {
+  posts.forEach((post) => {
+    console.log(post)
+  })
+}
