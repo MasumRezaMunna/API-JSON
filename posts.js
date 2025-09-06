@@ -1,29 +1,36 @@
-const loarPost = () => {
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        displayPosts(data);
+const loadPost = () => {
+  const url = "https://jsonplaceholder.typicode.com/posts";
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      displayPosts(data);
     });
 };
+
+// {userId: 10,
+//     id: 100,
+//     title: 'at nam consequatur ea labore ea harum', body: 'cupiditate quo est a modi nesciunt soluta\nipsa vol…nam et distinctio eum\naccusamus ratione error aut'}
 
 const displayPosts = (posts) => {
+  // 1. get the container and empty the container
+  const postsContainer = document.getElementById("post-container");
+  postsContainer.innerHTML = "";
+  posts.forEach((post) => {
+    // 2. create element
 
-    // 1. get the container
-    const postContainer = document.getElementById ("post-container");
-    console.log(postContainer)
+    const postCard = document.createElement("div");
+    postCard.innerHTML = ` 
+        <div class="post-card">
+            <h2>${post.title}</h2>
+            <p>${post.body}</p>
+        </div>
+    `
+    // 3. add to the container
+    postsContainer.append(postCard)
 
-
-    posts.forEach((post) => {
-        console.log(post.title);
-
-        // 2. create HTML element
-        const li = document.createElement("li");
-        li.innerText = post.title;
-        console.log(li)
-
-        // 3. add li into container
-        postContainer.appendChild(li)
-    });
+  });
 };
+
+
+loadPost();
